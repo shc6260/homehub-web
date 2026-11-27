@@ -5,7 +5,7 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
   "mainAssemblyName": "HomeHubWeb",
   "applicationEnvironment": "Development",
   "resources": {
-    "hash": "sha256-+A/topW1swpQgVn4IIi9VWySZEI9WsWpRb6J22MmwrI=",
+    "hash": "sha256-BVljXC2zneW5KaVwbZc3GyHPzw/YssnapQA/t+g2pis=",
     "jsModuleNative": [
       {
         "name": "dotnet.native.6ilbvndvcf.js"
@@ -1242,16 +1242,16 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
       },
       {
         "virtualPath": "HomeHubWeb.wasm",
-        "name": "HomeHubWeb.yaf0f080sl.wasm",
-        "hash": "sha256-hsN2h+bz5mSjqJtKQ0O+SAdtdENMhBSprAssoqDm7iE=",
+        "name": "HomeHubWeb.gmot100pdm.wasm",
+        "hash": "sha256-GP03VoMVcsC3Zc7N8+ecJbqNyd4CFMEHISeAZa9u6sg=",
         "cache": "force-cache"
       }
     ],
     "pdb": [
       {
         "virtualPath": "HomeHubWeb.pdb",
-        "name": "HomeHubWeb.sz0nk23nnp.pdb",
-        "hash": "sha256-OM9JJlRWo2jXqGOzXF8C61lmTw4fbEZ7EAkJk2QJCYw=",
+        "name": "HomeHubWeb.1e6qk1i9km.pdb",
+        "hash": "sha256-2ToJdYZTpiYKAuK0NylvVp3i9PHGaATTl0NtY1DoW5g=",
         "cache": "force-cache"
       }
     ],

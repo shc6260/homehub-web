@@ -1,0 +1,58 @@
+@page "/"
+@page "/calendar"
+@inject MockCalendarEventService MockEvents
+
+<PageTitle>우리 집 캘린더 · HomeHub</PageTitle>
+
+<main class="calendar-page">
+    <h1>우리 집 캘린더</h1>
+    <section class="calendar" aria-label="월간 캘린더">
+        <header class="calendar-header">
+            <h2>@month.ToString("yyyy년 M월")</h2>
+            <div class="calendar-actions">
+                <button class="button" @onclick="GoToToday">오늘</button>
+                <div class="month-nav">
+                    <button class="button icon-button" aria-label="이전 달" disabled="@(month == DateOnly.MinValue)" @onclick="() => MoveMonth(-1)">‹</button>
+                    <button class="button icon-button" aria-label="다음 달" disabled="@(month.Year == DateOnly.MaxValue.Year && month.Month == 12)" @onclick="() => MoveMonth(1)">›</button>
+                </div>
+            </div>
+        </header>
+        <div class="weekdays" aria-hidden="true">
+            @foreach (var name in Weekdays)
+            {
+                <span>@name</span>
+            }
+        </div>
+        @foreach (var week in weeks)
+        {
+            <div class="week" style="--event-rows:@week.EventRows" @key="week.Sunday">
+                @for (var column = 0; column < 7; column++)
+                {
+                    var dayNumber = week.Sunday + column;
+                    if (dayNumber < DateOnly.MinValue.DayNumber || dayNumber > DateOnly.MaxValue.DayNumber)
+                        continue;
+
+                    var day = DateOnly.FromDayNumber(dayNumber);
+                    <button class="day-hit weekday-@column @(day.Month != month.Month ? "outside" : "") @(day == today ? "today" : "")"
+                            style="grid-column:@(column + 1)" aria-label="@($"{day:yyyy년 M월 d일} {Weekdays[column]}요일")"
+                            aria-current="@(day == today ? "date" : null)" aria-pressed="@(day == selected ? "true" : "false")"
+                            @onclick="() => SelectDay(day)">
+                        <span>@day.Day</span>
+                    </button>
+                }
+                @foreach (var segment in week.Segments)
+                {
+                    var item = segment.Event;
+                    <div class="event-chip @item.Color @(item.StartDate == item.EndDate && item.StartTime is not null ? "timed" : "")"
+                         style="grid-column:@segment.Column / span @segment.Length; grid-row:@segment.Row">
+                        @if (item.StartTime is { } time && item.StartDate.DayNumber >= week.Sunday)
+                        {
+                            <span class="chip-time">@time.ToString("HH:mm")</span>
+                        }
+                        <span class="chip-title">@item.Title</span>
+                    </div>
+                }
+            </div>
+        }
+    </section>
+</main>
